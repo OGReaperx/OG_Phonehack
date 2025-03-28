@@ -22,8 +22,8 @@ dependencies {
 Define hacking zones/locations
 Support for different phone systems
 📦 Download:
-Preview: [preview]
+Preview: [preview](https://streamable.com/fgrw00_)
 
 💬 Support / Suggestions:
-Join us on Discord → [Discord]
+Join us on Discord → [Discord](https://discord.gg/EPbtPVmtAY)
 Or open an issue/request on GitHub!

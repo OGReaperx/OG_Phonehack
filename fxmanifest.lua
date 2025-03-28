@@ -3,7 +3,7 @@ game 'gta5'
 
 author 'OGReaper'
 description 'Simple leo phone hack for lb-phone'
-version '1.0.0'
+version '1.0.1'
 
 shared_scripts {
     '@ox_lib/init.lua',

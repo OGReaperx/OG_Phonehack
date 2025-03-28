@@ -19,4 +19,11 @@ server_scripts {
     'server/*.lua'
 }
 
+dependencies {
+    'ox_lib',
+    'oxmysql',
+    'ox_inventory',
+    'qbx_core',
+}
+
 lua54 'yes'

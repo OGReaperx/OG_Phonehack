@@ -1,29 +1,46 @@
-OG_Phonehack is a lightweight, high-utility script designed for QBox that gives law enforcement the ability to hack criminal phones, assuming the phone is in their inventory and matches the suspect’s number.
+📱 OG_Phonehack
+OG_Phonehack is a lightweight, high-utility script designed for QBox that gives law enforcement the ability to hack criminal phones — as long as the phone is in their inventory and the number matches the suspect’s.
 
-🧠 Features:
+🧠 Features
 🔹 Supports lb-phone & yseries phones
-🔹 Requires officers to physically have the phone in their inventory
-🔹 Number-matching system ensures legitimacy
-🔹 Configurable hacking zones (PD, mobile labs, etc.)
-🔹 Chance to corrupt the phone, wiping all its data
+
+🔹 Requires officers to physically possess the phone item
+
+🔹 Number-matching system to prevent abuse
+
+🔹 Configurable hacking zones (PD, mobile units, etc.)
+
+🔹 Chance to corrupt the phone, wiping all data
+
 🔹 Successful hacks reset phone security and unlock full access
+
 🔹 Designed for immersive LEO roleplay 🔍📱
 
-🧩 Dependencies:
+🧩 Dependencies
+lua
+Copy
+Edit
 dependencies {
     'ox_lib',
     'oxmysql',
     'ox_inventory',
     'qbx_core',
 }
-✅ 100% compatible with QBox and ox_inventory
 
-🔧 Configuration:
-Define hacking zones/locations
-Support for different phone systems
-📦 Download:
-Preview: [preview](https://streamable.com/fgrw00_)
+✅ Fully compatible with QBox and ox_inventory
 
-💬 Support / Suggestions:
+🔧 Configuration
+Easily define zones/locations where hacking is allowed
+
+Supports multiple phone systems (lb-phone, yseries)
+
+Set success/corruption chances, durations, and more
+
+📦 Preview
+🎥 [preview](https://streamable.com/fgrw00_)
+
+💬 Support & Feedback
+Need help or want to suggest something?
 Join us on Discord → [Discord](https://discord.gg/EPbtPVmtAY)
-Or open an issue/request on GitHub!
+Or open an issue/request right here on GitHub!
+

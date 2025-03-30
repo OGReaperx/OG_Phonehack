@@ -17,9 +17,6 @@ OG_Phonehack is a lightweight, high-utility script designed for QBox that gives 
 🔹 Designed for immersive LEO roleplay 🔍📱
 
 🧩 Dependencies
-lua
-Copy
-Edit
 dependencies {
     'ox_lib',
     'oxmysql',

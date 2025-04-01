@@ -1,5 +1,5 @@
 📱 OG_Phonehack
-OG_Phonehack is a lightweight, high-utility script designed for QBox that gives law enforcement the ability to hack criminal phones — as long as the phone is in their inventory and the number matches the suspect’s.
+is a lightweight, high-utility script designed for QBox that gives law enforcement the ability to hack criminal phones — as long as the phone is in their inventory and the number matches the suspect’s.
 
 🧠 Features
 🔹 Supports lb-phone & yseries phones
@@ -17,24 +17,16 @@ OG_Phonehack is a lightweight, high-utility script designed for QBox that gives 
 🔹 Designed for immersive LEO roleplay 🔍📱
 
 🧩 Dependencies
-lua
-Copy
-Edit
-dependencies {
-    'ox_lib',
-    'oxmysql',
-    'ox_inventory',
-    'qbx_core',
-}
+- ox_lib
+- oxmysql
+- ox_inventory
+- qbx_core
+- bl_ui
 
 ✅ Fully compatible with QBox and ox_inventory
 
 🔧 Configuration
 Easily define zones/locations where hacking is allowed
-
-Supports multiple phone systems (lb-phone, yseries)
-
-Set success/corruption chances, durations, and more
 
 📦 Preview
 🎥 [preview](https://streamable.com/fgrw00_)

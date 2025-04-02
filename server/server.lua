@@ -38,7 +38,8 @@ end
 
 lib.callback.register('phoneunlock:unlockPhone', function(source, phoneNumber)
     local src = source
-    local Player = exports['qbx_core']:GetPlayer(src)
+    local Player = og.framework.GetPlayer(src)
+    if not Player then return end
 
     if not phoneNumber or phoneNumber == "" then
         print("[ERROR] Invalid phone number received for unlocking")
@@ -118,7 +119,8 @@ end)
 
 lib.callback.register('phoneunlock:corruptPhone', function(source, phoneNumber)
     local src = source
-    local Player = exports['qbx_core']:GetPlayer(src)
+    local Player = og.framework.GetPlayer(src)
+    if not Player then return end
 
     if not phoneNumber or phoneNumber == "" then
         print("[ERROR] Invalid phone number received for corrupting")

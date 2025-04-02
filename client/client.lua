@@ -1,21 +1,30 @@
 local bl_ui = exports.bl_ui
 
 CreateThread(function()
-    for _, comp in pairs(Config.Computers) do
-        exports.ox_target:addSphereZone({
-            coords = comp.coords,
-            radius = comp.radius,
-            options = {
-                {
-                    name = 'unlockPhone',
-                    event = 'phoneunlock:openDialog',
-                    icon = 'fas fa-laptop',
-                    label = 'Unlock Phone'
-                }
+    for i, comp in ipairs(Config.Computers) do
+        local zoneName = 'phone_unlock_zone_' .. i
+
+        local options = {
+            {
+                name = 'unlockPhone',
+                event = 'phoneunlock:openDialog',
+                icon = 'fas fa-laptop',
+                label = 'Unlock Phone'
             }
-        })
+        }
+
+        if comp.size then
+            og.target.AddBoxZone(zoneName, comp.coords, comp.size, {
+                options = options
+            })
+        else
+            og.target.AddSphereZone(zoneName, comp.coords, comp.radius, {
+                options = options
+            })
+        end
     end
 end)
+
 
 RegisterNetEvent('phoneunlock:openDialog')
 AddEventHandler('phoneunlock:openDialog', function()

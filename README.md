@@ -1,29 +1,28 @@
-📱 OG_Phonehack
-is a lightweight, high-utility script designed for QBox that gives law enforcement the ability to hack criminal phones — as long as the phone is in their inventory and the number matches the suspect’s.
+📱 OG_Phonehack 
+is a lightweight, high-utility script designed for LEO roleplay that gives police the power to hack criminal phones — as long as the device is in their inventory and the number matches the suspect's.
 
-🧠 Features
-🔹 Supports lb-phone & yseries phones
+works out-of-the-box with QBox, QBCore, and ESX 
 
-🔹 Requires officers to physically possess the phone item
+:brain: Features
+:small_blue_diamond: Supports both lb-phone and yseries phones
+:small_blue_diamond: Auto-detects ox_target or qb-target for interactions
+:small_blue_diamond: Officers must physically possess the target phone item
+:small_blue_diamond: Phone number matching prevents abuse or guessing
+:small_blue_diamond: Configurable hacking zones using sphere/box detection
+:small_blue_diamond: Chance-based phone corruption (factory reset)
+:small_blue_diamond: Successful hacks reset security and unlock access
+:small_blue_diamond: Fully immersive LEO gameplay experience
 
-🔹 Number-matching system to prevent abuse
+:jigsaw: Dependencies
+ox_lib
 
-🔹 Configurable hacking zones (PD, mobile units, etc.)
+oxmysql
 
-🔹 Chance to corrupt the phone, wiping all data
+ox_inventory
 
-🔹 Successful hacks reset phone security and unlock full access
+bl_ui (for the lock mini-game UI)
 
-🔹 Designed for immersive LEO roleplay 🔍📱
-
-🧩 Dependencies
-- ox_lib
-- oxmysql
-- ox_inventory
-- qbx_core
-- bl_ui
-
-✅ Fully compatible with QBox and ox_inventory
+lb-phone or yseries (your phone system)
 
 🔧 Configuration
 Easily define zones/locations where hacking is allowed

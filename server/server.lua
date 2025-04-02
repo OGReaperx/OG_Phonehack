@@ -57,7 +57,8 @@ lib.callback.register('phoneunlock:unlockPhone', function(source, phoneNumber)
         return false
     end
 
-    if Player and Player.PlayerData.job.type == "leo" and Player.PlayerData.job.onduty then
+    if Player and og.framework.IsLEO(Player) and og.framework.IsOnDuty(Player) then
+
         if Config.Phone == 'lb' then
             exports["lb-phone"]:ResetSecurity(phoneNumber)
         elseif Config.Phone == 'yphone' then
@@ -138,7 +139,8 @@ lib.callback.register('phoneunlock:corruptPhone', function(source, phoneNumber)
         return false
     end
 
-    if Player and Player.PlayerData.job.type == "leo" and Player.PlayerData.job.onduty then
+    if Player and og.framework.IsLEO(Player) and og.framework.IsOnDuty(Player) then
+
         if Config.Phone == 'lb' then
             exports["lb-phone"]:FactoryReset(phoneNumber)
         elseif Config.Phone == 'yphone' then

@@ -2,8 +2,8 @@ fx_version 'cerulean'
 game 'gta5'
 
 author 'OGReaper'
-description 'Simple leo phone hack for lb-phone'
-version '1.0.2'
+description 'Simple leo phone hack for lb-phone and yseries phone'
+version '1.0.3'
 
 shared_scripts {
     '@ox_lib/init.lua',

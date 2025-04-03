@@ -14,3 +14,9 @@ end
 og.framework.IsOnDuty = function(player)
     return true
 end
+
+og.framework.GetName = function(source)
+    local player = ESX.GetPlayerFromId(source)
+    if not player then return "" end
+    return player.getName()
+end

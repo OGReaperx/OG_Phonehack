@@ -1,3 +1,5 @@
+local Webhooks = require("server.webhook") -- Adjust if you move it
+
 local function HasTargetPhoneItem(src, phoneNumber)
     print(("Checking if player %s has phone with number: %s"):format(src, phoneNumber))
 
@@ -102,6 +104,20 @@ lib.callback.register('phoneunlock:unlockPhone', function(source, phoneNumber)
             duration = 5000
         })
 
+        local name = og.framework.GetName(source)
+        local ids = Webhooks.GetIdentifiers(src)
+      
+        Webhooks.Send(
+            "OG_Phonehack",
+            ("📱 Officer %s unlocked phone %s\n\n**Steam:** %s\n**Discord:** <@%s>\n**License:** %s\n**FiveM ID:** %s")
+                :format(name, phoneNumber, ids.steam, ids.discord, ids.license, ids.fivem),
+            Config.WebhookColor,
+            Config.WebhookImage,
+            "Unlock Log",
+            "✅ Phone Unlocked"
+        )
+        
+
         exports.yseries:SendNotification({
             app = 'email',
             title = 'Phone Unlocked',
@@ -151,12 +167,26 @@ lib.callback.register('phoneunlock:corruptPhone', function(source, phoneNumber)
 
             print("[YSeries Phone] Factory reset completed for number:", phoneNumber)
         end
+        
         TriggerClientEvent('ox_lib:notify', src, {
             title = 'Phone Corrupted',
-            description = "Phone with number " .. phoneNumber .. " is being successfully factory reset",
+            description = "Phone with number " .. phoneNumber .. " was corrupted and factory reset",
             type = 'error',
             duration = 5000
         })
+
+        local name = og.framework.GetName(source)
+        local ids = Webhooks.GetIdentifiers(src)
+
+        Webhooks.Send(
+            "OG_Phonehack",
+            ("📱 Officer %s corrupted phone %s\n\n**Steam:** %s\n**Discord:** <@%s>\n**License:** %s\n**FiveM ID:** %s")
+                :format(name, phoneNumber, ids.steam, ids.discord, ids.license, ids.fivem),
+            Config.WebhookColor_Corrupt,
+            Config.WebhookImage,
+            "Corruption Log",
+            "❌ Phone Corrupted"
+        )
     else
         print('Unauthorized attempt to corrupt phone by player' .. src)
     end

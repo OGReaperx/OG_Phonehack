@@ -6,13 +6,13 @@ __***works out-of-the-box with***__
 - ESX
 
 🧠 __***Features***__
-🔹 Supports both lb-phone and yseries phones
-🔹 Officers must physically possess the target phone item
-🔹 Phone number matching prevents abuse or guessing
-🔹 Configurable hacking zones using sphere/box detection
-🔹 Chance-based phone corruption (factory reset)
-🔹 Successful hacks reset security and unlock access
-🔹 Fully immersive LEO gameplay experience
+- 🔹 Supports both lb-phone and yseries phones
+- 🔹 Officers must physically possess the target phone item
+- 🔹 Phone number matching prevents abuse or guessing
+- 🔹 Configurable hacking zones using sphere/box detection
+- 🔹 Chance-based phone corruption (factory reset)
+- 🔹 Successful hacks reset security and unlock access
+- 🔹 Fully immersive LEO gameplay experience
 
 🧩 __***Dependencies***__
 - ox_lib

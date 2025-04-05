@@ -7,19 +7,16 @@ version '1.0.3'
 
 shared_scripts {
     '@ox_lib/init.lua',
-    'bridge/shared.lua',
     'shared/*.lua'
-}
-
-client_scripts {
-    'bridge/init/client.lua',
-    'client/*.lua'
 }
 
 server_scripts {
     '@oxmysql/lib/MySQL.lua',
-    'bridge/init/server.lua',
     'server/*.lua'
+}
+
+client_scripts {
+    'client/*.lua'
 }
 
 dependencies {

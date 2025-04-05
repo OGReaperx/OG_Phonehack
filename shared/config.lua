@@ -13,13 +13,20 @@ Config.WebhookImage = "https://cdn-icons-png.flaticon.com/128/597/597177.png" --
 
 Config.PhoneMetadataKey = 'phoneNumber' -- 'phoneNumber' for 'lb-phone' | 'imei' for 'yseries' | metadata key to store the phone number
 
+Config.PoliceJobs = { -- police jobs to check for unlocking phone
+    'police',
+    'sheriff',
+    'statepolice',
+    'fbi',
+}
+
 Config.Computers = {
     {
-        coords = vec3(68.85, -387.95, 53.2), 
-        radius = 0.4
-    }, -- This will trigger spherezone
-    {
+        coords = vec3(440.99, -980.16, 31.0), -- coords of the computer
+        radius = 0.3 -- This will trigger spherezone
+    },
+    -- {
         -- coords = vec3(200.0, -300.0, 54.0),
         -- size = vec3(2.0, 2.0, 2.0) -- will trigger box zone
-    }
+    --}
 }

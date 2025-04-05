@@ -1,30 +1,37 @@
 local bl_ui = exports.bl_ui
+local Bridge = exports.community_bridge:Bridge()
 
 CreateThread(function()
-    for i, comp in ipairs(Config.Computers) do
-        local zoneName = 'phone_unlock_zone_' .. i
+    Wait(100)
+    local playerjobname = Bridge.Framework.GetPlayerJob()
+    
+    if not playerjobname then 
+        return 
+    end
 
-        local options = {
-            {
-                name = 'unlockPhone',
-                event = 'phoneunlock:openDialog',
-                icon = 'fas fa-laptop',
-                label = 'Unlock Phone'
+    if lib.table.contains(Config.PoliceJobs, playerjobname) then
+        
+        for i, comp in ipairs(Config.Computers) do
+            local zoneName = 'phone_unlock_zone_' .. i
+            Bridge.Target.RemoveZone(zoneName)
+            local options = {
+                {
+                    name = 'unlockPhone',
+                    icon = 'fas fa-laptop',
+                    label = 'Unlock Phone',
+                    action = function()
+                        TriggerEvent('phoneunlock:openDialog')
+                    end
+                }
             }
-        }
-
-        if comp.size then
-            og.target.AddBoxZone(zoneName, comp.coords, comp.size, {
-                options = options
-            })
-        else
-            og.target.AddSphereZone(zoneName, comp.coords, comp.radius, {
-                options = options
-            })
+            if comp.size then
+                Bridge.Target.AddBoxZone(zoneName, comp.coords, comp.size, 0, options) 
+            else
+                Bridge.Target.AddSphereZone(zoneName, comp.coords, comp.radius, 0, options)
+            end
         end
     end
 end)
-
 
 RegisterNetEvent('phoneunlock:openDialog')
 AddEventHandler('phoneunlock:openDialog', function()

@@ -1,4 +1,5 @@
 local Webhooks = require("server.webhook") -- Adjust if you move it
+local Bridge = exports.community_bridge:Bridge()
 
 local function HasTargetPhoneItem(src, phoneNumber)
     print(("Checking if player %s has phone with number: %s"):format(src, phoneNumber))
@@ -40,8 +41,11 @@ end
 
 lib.callback.register('phoneunlock:unlockPhone', function(source, phoneNumber)
     local src = source
-    local Player = og.framework.GetPlayer(src)
-    if not Player then return end
+    local playerjobname = Bridge.Framework.GetPlayerJob(src)
+    
+    if not playerjobname then 
+        return 
+    end
 
     if not phoneNumber or phoneNumber == "" then
         print("[ERROR] Invalid phone number received for unlocking")
@@ -59,7 +63,8 @@ lib.callback.register('phoneunlock:unlockPhone', function(source, phoneNumber)
         return false
     end
 
-    if Player and og.framework.IsLEO(Player) and og.framework.IsOnDuty(Player) then
+    if playerjobname == Config.PoliceJobs then
+        print("Player is LEO and on duty. Proceeding with unlock...")
 
         if Config.Phone == 'lb' then
             exports["lb-phone"]:ResetSecurity(phoneNumber)
@@ -104,7 +109,8 @@ lib.callback.register('phoneunlock:unlockPhone', function(source, phoneNumber)
             duration = 5000
         })
 
-        local name = og.framework.GetName(source)
+        local playerfirstname, playerlastname = Bridge.Framework.GetPlayerName(src)
+        local name = playerfirstname .. " " .. playerlastname
         local ids = Webhooks.GetIdentifiers(src)
       
         Webhooks.Send(
@@ -136,8 +142,8 @@ end)
 
 lib.callback.register('phoneunlock:corruptPhone', function(source, phoneNumber)
     local src = source
-    local Player = og.framework.GetPlayer(src)
-    if not Player then return end
+    local playerjobname = Bridge.Framework.GetPlayerJob(src)
+    if not playerjobname then return end
 
     if not phoneNumber or phoneNumber == "" then
         print("[ERROR] Invalid phone number received for corrupting")
@@ -155,7 +161,8 @@ lib.callback.register('phoneunlock:corruptPhone', function(source, phoneNumber)
         return false
     end
 
-    if Player and og.framework.IsLEO(Player) and og.framework.IsOnDuty(Player) then
+    if playerjobname == Config.PoliceJobs then
+        print("Player is LEO and on duty. Proceeding with unlock...")
 
         if Config.Phone == 'lb' then
             exports["lb-phone"]:FactoryReset(phoneNumber)
@@ -175,7 +182,8 @@ lib.callback.register('phoneunlock:corruptPhone', function(source, phoneNumber)
             duration = 5000
         })
 
-        local name = og.framework.GetName(source)
+        local playerfirstname, playerlastname = Bridge.Framework.GetPlayerName(src)
+        local name = playerfirstname .. " " .. playerlastname
         local ids = Webhooks.GetIdentifiers(src)
 
         Webhooks.Send(

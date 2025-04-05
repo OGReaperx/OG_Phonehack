@@ -23,6 +23,7 @@ dependencies {
     'ox_lib',
     'oxmysql',
     'ox_inventory',
+    'community_bridge'
 }
 
 lua54 'yes'

@@ -4,40 +4,39 @@ local Bridge = exports.community_bridge:Bridge()
 local function HasTargetPhoneItem(src, phoneNumber)
     print(("Checking if player %s has phone with number: %s"):format(src, phoneNumber))
 
-    -- Get the IMEI that belongs to this number
-    local imei = exports.yseries:GetPhoneImeiByPhoneNumber(phoneNumber)
-    print("Resolved IMEI for phone number " .. phoneNumber .. ": " .. tostring(imei))
-
-    if not imei then
-        print("Failed to resolve IMEI for number:", phoneNumber)
+    local compareValue
+    if Config.Phone == 'yphone' then
+        compareValue = exports.yseries:GetPhoneImeiByPhoneNumber(phoneNumber)
+        print("Resolved IMEI for yphone: " .. tostring(compareValue))
+    elseif Config.Phone == 'lb' then
+        compareValue = phoneNumber
+        print("Using phone number directly for lb-phone: " .. tostring(compareValue))
+    else
+        print("[ERROR] Unsupported phone type in Config.Phone:", Config.Phone)
         return false
     end
 
+    if not compareValue then
+        print("[ERROR] Could not resolve value to match against item metadata")
+        return false
+    end
+
+    -- Check inventory for item with matching metadata
     for _, itemName in pairs(Config.RequiredPhoneItem) do
-        print(("Searching for item: %s"):format(itemName))
-        local phoneItems = exports.ox_inventory:Search(src, 'slots', itemName)
-        print(("Found %d '%s' items"):format(#phoneItems, itemName))
+        local item = Bridge.Inventory.GetItem(src, itemName, {
+            [Config.PhoneMetadataKey] = compareValue
+        })
 
-        for i, slot in ipairs(phoneItems) do
-            print(("Item %d: slot=%s, metadata=%s"):format(i, slot.slot or "nil", json.encode(slot.metadata or {})))
-
-            if slot.metadata and slot.metadata[Config.PhoneMetadataKey] then
-                local itemImei = slot.metadata[Config.PhoneMetadataKey]
-                print(("Comparing item IMEI '%s' with target IMEI '%s'"):format(itemImei, imei))
-
-                if itemImei == imei then
-                    print("✅ Match found!")
-                    return true
-                end
-            else
-                print("No metadata or IMEI found for this item.")
-            end
+        if item then
+            print(("✅ Found matching phone item '%s' with %s = %s"):format(itemName, Config.PhoneMetadataKey, compareValue))
+            return true
         end
     end
 
-    print("No matching phone found.")
+    print("❌ No matching phone item found in inventory.")
     return false
 end
+
 
 lib.callback.register('phoneunlock:unlockPhone', function(source, phoneNumber)
     local src = source
@@ -63,9 +62,8 @@ lib.callback.register('phoneunlock:unlockPhone', function(source, phoneNumber)
         return false
     end
 
-    if playerjobname == Config.PoliceJobs then
+    if lib.table.contains(Config.PoliceJobs, playerjobname) then        
         print("Player is LEO and on duty. Proceeding with unlock...")
-
         if Config.Phone == 'lb' then
             exports["lb-phone"]:ResetSecurity(phoneNumber)
         elseif Config.Phone == 'yphone' then
@@ -161,9 +159,8 @@ lib.callback.register('phoneunlock:corruptPhone', function(source, phoneNumber)
         return false
     end
 
-    if playerjobname == Config.PoliceJobs then
+    if lib.table.contains(Config.PoliceJobs, playerjobname) then        
         print("Player is LEO and on duty. Proceeding with unlock...")
-
         if Config.Phone == 'lb' then
             exports["lb-phone"]:FactoryReset(phoneNumber)
         elseif Config.Phone == 'yphone' then

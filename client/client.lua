@@ -1,37 +1,53 @@
 local bl_ui = exports.bl_ui
 local Bridge = exports.community_bridge:Bridge()
 
-CreateThread(function()
-    Wait(100)
-    local playerjobname = Bridge.Framework.GetPlayerJob()
-    
-    if not playerjobname then 
-        return 
-    end
-
-    if lib.table.contains(Config.PoliceJobs, playerjobname) then
-        
-        for i, comp in ipairs(Config.Computers) do
-            local zoneName = 'phone_unlock_zone_' .. i
-            Bridge.Target.RemoveZone(zoneName)
-            local options = {
-                {
-                    name = 'unlockPhone',
-                    icon = 'fas fa-laptop',
-                    label = 'Unlock Phone',
-                    action = function()
-                        TriggerEvent('phoneunlock:openDialog')
-                    end
-                }
-            }
-            if comp.size then
-                Bridge.Target.AddBoxZone(zoneName, comp.coords, comp.size, 0, options) 
-            else
-                Bridge.Target.AddSphereZone(zoneName, comp.coords, comp.radius, 0, options)
-            end
+local contains = function(tbl, val)
+    for _, v in pairs(tbl) do
+        if v == val then
+            return true
         end
     end
+    return false
+end
+
+local createZones = function()
+    for i, comp in ipairs(Config.Computers) do
+        local zoneName = 'phone_unlock_zone_' .. i
+        Bridge.Target.RemoveZone(zoneName)
+        local options = {
+            {
+                name = 'unlockPhone',
+                icon = 'fas fa-laptop',
+                label = 'Unlock Phone',
+                action = function()
+                    TriggerEvent('phoneunlock:openDialog')
+                end,
+                canInteract = function()
+                    local result = contains(Config.PoliceJobs, Bridge.Framework.GetPlayerJob())
+                    return result
+                end
+            }
+        }
+        if comp.size then
+            Bridge.Target.AddBoxZone(zoneName, comp.coords, comp.size, 0, options)
+        else
+            Bridge.Target.AddBoxZone(zoneName, comp.coords,vector3(comp.radius,comp.radius,comp.radius), 0, options)
+        end
+    end
+end
+
+RegisterNetEvent('community_bridge:Client:OnPlayerLoaded', function()
+createZones()
 end)
+
+RegisterNetEvent('community_bridge:Client:OnPlayerUnload', function()
+    for i = 1, #Config.Computers do
+        local zoneName = 'phone_unlock_zone_' .. i
+        Bridge.Target.RemoveZone(zoneName)
+        print("RemoveZone OnUnload: "..zoneName)
+    end
+end)
+
 
 RegisterNetEvent('phoneunlock:openDialog')
 AddEventHandler('phoneunlock:openDialog', function()
@@ -57,7 +73,7 @@ AddEventHandler('phoneunlock:openDialog', function()
 
     local success = bl_ui:PrintLock(1, {
         grid = 3,
-        duration = 20000,
+        duration = 20000,   
         target = 2
     })
 

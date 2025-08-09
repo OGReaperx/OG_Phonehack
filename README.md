@@ -6,7 +6,7 @@ __***works out-of-the-box with***__
 - ESX
 
 🧠 __***Features***__
-- 🔹 Supports both lb-phone and yseries phones
+- 🔹 Supports lb-phone
 - 🔹 Officers must physically possess the target phone item
 - 🔹 Phone number matching prevents abuse or guessing
 - 🔹 Configurable hacking zones using sphere/box detection
@@ -17,7 +17,6 @@ __***works out-of-the-box with***__
 🧩 __***Dependencies***__
 - ox_lib
 - oxmysql
-- ox_inventory
 - bl_ui (for the lock mini-game UI)
 - lb-phone or yseries (your phone system)
 - [community_bridge]((https://github.com/The-Order-Of-The-Sacred-Framework/community_bridge))

@@ -18,7 +18,7 @@ __***works out-of-the-box with***__
 - ox_lib
 - oxmysql
 - bl_ui (for the lock mini-game UI)
-- lb-phone or yseries (your phone system)
+- lb-phone
 - [community_bridge]((https://github.com/The-Order-Of-The-Sacred-Framework/community_bridge))
 
 🔧 __***Configuration Easily***__
